@@ -33,5 +33,10 @@ streamlit run bot.py
 ```
 
 ## Reference
+
 1. [Neo4j GraphAcademy Course #1](https://graphacademy.neo4j.com/courses/llm-chatbot-python/)
 2. [Neo4j GraphAcademy Course #2](https://graphacademy.neo4j.com/courses/llm-fundamentals/)
+
+## Future work
+
+- Data Cleaning

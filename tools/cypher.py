@@ -6,7 +6,6 @@ from graph import graph
 from llm import llm
 
 # Create the Cypher QA chain
-# TODO: Second and third example in the prompt may be needed.
 CYPHER_GENERATION_TEMPLATE = """
 你是一位专业的Neo4j医疗知识图谱专家，请将用户的医疗健康相关问题转化为Cypher查询语句，用于查询疾病、症状、药物、检查等信息。
 
@@ -27,10 +26,28 @@ CYPHER_GENERATION_TEMPLATE = """
 
 以下是一些Cypher查询语句示例:
 
-查询某种疾病的所有症状:
+1.查询某种症状对应的所有可能疾病:
 ```
-MATCH (d:Disease {name: "疾病名称"})-[:has_symptom]->(s:Symptom)
+MATCH (d:Disease)-[:has_symptom]->(s:Symptom {name: "症状名称"})
 RETURN s.name AS symptom
+```
+
+2.查询得了某种疾病后不能吃的食物:
+```
+MATCH (d:Disease {name: "疾病名称"})-[:no_eat]->(r:Food)
+RETURN r.name AS no_eat_food
+```
+
+3.查询得了某种疾病后推荐吃的菜肴：
+```
+MATCH (d:Disease {name: "疾病名称"})-[:recommend_eat]->(r:Recipe)
+RETURN r.name AS recommend_eat_recipe
+```
+
+4.查询某种疾病的治疗方法：
+```
+MATCH (d:Disease {name: "疾病名称"})
+RETURN d.cure_way AS cure_way
 ```
 
 Schema:

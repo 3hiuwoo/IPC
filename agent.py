@@ -5,7 +5,6 @@ from langchain_core.prompts import ChatPromptTemplate, PromptTemplate
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_neo4j import Neo4jChatMessageHistory
 
-# from tools.cypher import cypher_qa
 from graph import graph
 from llm import llm
 from utils import get_session_id
@@ -60,6 +59,7 @@ agent_prompt = PromptTemplate.from_template("""
 1.请注意，疾病、症状、药物等类型之间都是多对多关系，请在回答时尽量完整列出所有相关内容。
 2.如获取信息不全或需进一步确认，可主动向用户提问以获取更多细节。
 3.如果始终无法通过知识图谱或文本检索等工具无法获得有效答案，请直接告知用户“暂无相关知识”或“建议咨询专业医生”，不要编造信息。
+4.由于数据清洗不彻底，有时候检索得到的数据可能出现错别字、冗余等情况，请在回答时尽量修正这些问题，确保回答的专业性和准确性。
 
 工具列表如下：
 
