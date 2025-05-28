@@ -28,25 +28,25 @@ CYPHER_GENERATION_TEMPLATE = """
 
 1.查询某种症状对应的所有可能疾病:
 ```
-MATCH (d:Disease)-[:has_symptom]->(s:Symptom {name: "症状名称"})
+MATCH (d:Disease)-[:has_symptom]->(s:Symptom {{name: "症状名称"}})
 RETURN s.name AS symptom
 ```
 
 2.查询得了某种疾病后不能吃的食物:
 ```
-MATCH (d:Disease {name: "疾病名称"})-[:no_eat]->(r:Food)
+MATCH (d:Disease {{name: "疾病名称"}})-[:no_eat]->(r:Food)
 RETURN r.name AS no_eat_food
 ```
 
 3.查询得了某种疾病后推荐吃的菜肴：
 ```
-MATCH (d:Disease {name: "疾病名称"})-[:recommend_eat]->(r:Recipe)
+MATCH (d:Disease {{name: "疾病名称"}})-[:recommend_eat]->(r:Recipe)
 RETURN r.name AS recommend_eat_recipe
 ```
 
 4.查询某种疾病的治疗方法：
 ```
-MATCH (d:Disease {name: "疾病名称"})
+MATCH (d:Disease {{name: "疾病名称"}})
 RETURN d.cure_way AS cure_way
 ```
 

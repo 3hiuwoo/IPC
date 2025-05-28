@@ -368,8 +368,8 @@ class MedicalKnowledgeGraphBuilder:
         # Extract triples from JSON data
         self.extract_triples(path)
         self.build_nodes()
-        self.build_relationships()
         self.set_disease_properties()
+        self.build_relationships()
         
         print("Knowledge graph built successfully!")
         

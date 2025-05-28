@@ -9,7 +9,7 @@ from graph import graph
 from llm import llm
 from utils import get_session_id
 from tools.cypher import cypher_qa
-from tools.vector import retrieve_disease_description
+# from tools.vector import retrieve_disease_description
 
 chat_prompt = ChatPromptTemplate.from_messages(
     [
@@ -32,15 +32,15 @@ tools = [
         func=consult_chat.invoke,
     ),
     Tool.from_function(
-        name="医学描述语义检索",  
-        description="用于根据用户问题，检索疾病等节点的详细描述、病因、治疗方法等长文本内容，适合‘什么是某疾病’等问题。",
-        func=retrieve_disease_description, 
-    ),
-    Tool.from_function(
         name="医疗信息查询",
         description="基于医疗知识图谱，使用Cypher语句检索疾病、症状、药物等结构化信息，适合‘某疾病有哪些症状’、‘某症状可能是什么病’等问题。",
         func=cypher_qa
-    )
+    ),
+    # Tool.from_function(
+    #     name="疾病描述语义检索",  
+    #     description="用于不好直接使用Cypher语句查询的问题，如用户描述自己的症状并询问疾病类型，受限于描述的任意性，更适合使用向量表示进行语义检索。",
+    #     func=retrieve_disease_description, 
+    # )
 ]
 
 # Create chat history callback
@@ -51,7 +51,9 @@ def get_memory(session_id):
 agent_prompt = PromptTemplate.from_template("""
 你是一位医学专家，专注于为用户提供权威、详细的医疗健康信息。
 
-请尽可能详细、准确地回答用户的问题，只能基于提供的上下文和工具返回答案，不要凭空编造。
+请尽可能详细、准确地回答用户的问题，因此，你应该尽可能地调用工具尝试检索有关知识以确保准确性。
+
+只能基于提供的上下文和工具返回答案，不要凭空编造。
 
 请不要回答与医疗、健康、疾病、药物、症状等无关的问题。
 

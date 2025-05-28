@@ -1,15 +1,15 @@
 import streamlit as st
 
-from agent import generate_response
+from plain_agent import generate_response
 from utils import write_message
 
 # Page Config
-st.set_page_config("智能问诊助手", page_icon=":male-doctor:")
+st.set_page_config("问诊助手", page_icon="random")
 
 # Set up Session State
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "assistant", "content": "你好，我是您的智能问诊助手，请问有什么可以帮助您的？"},
+        {"role": "assistant", "content": "你好，我是您的问诊助手，请问有什么可以帮助您的？"},
     ]
 
 # Display messages in Session State
