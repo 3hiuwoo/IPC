@@ -4,6 +4,8 @@
 - Using [Neo4j](https://neo4j.com/), it integrates both structured and unstructured information, enabling accurate and comprehensive answers to user health queries.
 - Note that it is easy to transfer this project into English, as long as the English data is available.
 
+![demo](img/image.png)
+
 ## Running
 
 Create a virtual environment and run:
